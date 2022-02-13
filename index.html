@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/register.css">
+    <script src="js/validate.js"></script>
+</head>
+<body>
+    <main>
+        <form name = "accountCreation" action="sucess.html" onsubmit="return validateForm()">
+            <h1>HERMANI</h1>
+            <h2>Create an Account</h2>
+            <p class = "error" id = "error"></p>
+
+            <label for="name">Name *</label>
+            <input type="text" name = "name">
+
+            <label for="surname">Surname *</label>
+            <input type="text" name = "surname">
+
+            <label for="email">Email *</label>
+            <input type="email" name = "email" required>
+            <!-- Too much regex, I'm not sure how to format it, so I'm using "required" here -->
+
+            <label for="pass">Password *</label>
+            <input type="password" name = "password">
+
+            <label for="passwordCheck">Confirm Password *</label>
+            <input type="password" name = "passwordCheck">
+            <label for="pass">
+                <ul>
+                    A password must contain the following:
+                    <li>- At least 8 characters</li>
+                    <li>- At least 1 capital letter</li>
+                    <li>- At least 1 special character</li>
+                </ul>
+            </label>
+
+            <input id = "submit-btn" type="submit" value="Create Account">
+        </form>
+    </main>
+</body>
+</html>
