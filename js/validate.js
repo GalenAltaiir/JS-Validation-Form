@@ -12,13 +12,13 @@ function validateForm(){
     let surnameCheck = document.forms["accountCreation"]["surname"].value;
     let passCheck = document.forms["accountCreation"]["password"].value;
     let passConfirm = document.forms["accountCreation"]["passwordCheck"].value;
-
 // innocent until proven guilty
     let fail = false;
 
     
     let errorBox = document.getElementById("error")
     errorBox.innerHTML = ""
+
 
     // Validate name field
 
