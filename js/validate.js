@@ -1,18 +1,22 @@
 
 
-function containsSpecialChars(string) {
+function containsSpecialChars(str) {
     const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~1234567890]/;
-    // check for any special characters using regex (source: https://bobbyhadz.com/blog/javascript-check-if-string-contains-special-characters#:~:text=To%20check%20if%20a%20string,special%20character%20and%20false%20otherwise.)
-    // I added the numbers
-    return specialChars.test(string);
+    return specialChars.test(str);
 }
 
-function emailCheks(string) {
-    const emailReg = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~1234567890]/;
-    // check for any special characters using regex (source: https://bobbyhadz.com/blog/javascript-check-if-string-contains-special-characters#:~:text=To%20check%20if%20a%20string,special%20character%20and%20false%20otherwise.)
-    // I added the numbers
-    return emailReg.test(string);
+function emailChecks(str) {
+    const emailReg = /^[a-zA-Z0-9]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/gim;
+    // not 100% fool proof, can be fooled by typing anything after the @ symbol
+    // apparently email validation is overcomplicated
+    return emailReg.test(str);
 }
+
+function mobileCheck(str){
+    const mobileReg = /^([0][0-9]{9}|[+44][0-9]{12})$/gm;
+    return mobileReg.test(str);
+} // currently not used
+
 
 function validateForm(){
 // Removes any whitespaces (spacebar, tabs, etc)
@@ -24,6 +28,7 @@ function validateForm(){
     let passCheck = document.forms["accountCreation"]["password"].value.replace(/\s+/g, '');
     let passConfirm = document.forms["accountCreation"]["passwordCheck"].value.replace(/\s+/g, '');
     let mailConfirm = document.forms["accountCreation"]["email"].value.replace(/\s+/g, '');
+    let mobileConfirm = document.forms["accountCreation"]["mobile"].value.replace(/\s+/g, '');
 // innocent until proven guilty
     let fail = false;
 
@@ -31,8 +36,16 @@ function validateForm(){
     let errorBox = document.getElementById("error")
     errorBox.innerHTML = ""
 
+    if(!mobileCheck || nameCheck == "" || nameCheck.length < 2){
+        errorBox.innerHTML += "Please enter a valid mobile number. (UK ONLY) <br>"
+        document.getElementById("mobile").style.border = "1px solid red"
+        fail = true;
+    } else {
+        document.getElementById("mobile").style.border = "1px solid black"
+    }
+
     //Validate Email
-    if(mailConfirm == "" || !mailConfirm.includes("@") || nameCheck.length < 5){
+    if(!emailChecks(mailConfirm) || nameCheck == "" || nameCheck.length < 2){
         errorBox.innerHTML += "Please enter a valid email. <br>"
         document.getElementById("email").style.border = "1px solid red"
         fail = true;
